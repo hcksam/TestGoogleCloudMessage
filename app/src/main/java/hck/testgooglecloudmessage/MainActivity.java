@@ -52,15 +52,20 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("UserDetails",
                 Context.MODE_PRIVATE);
+//        prefs.edit().clear().commit();
         String registrationId = prefs.getString(REG_ID, "");
 
         //When Email ID is set in Sharedpref, User will be taken to HomeActivity
         if (!TextUtils.isEmpty(registrationId)) {
+            regId = registrationId;
+            storeRegIdinServer();
             Intent i = new Intent(applicationContext, HomeActivity.class);
             i.putExtra("regId", registrationId);
             startActivity(i);
             finish();
         }
+
+        emailET.setText("hcksamtest@gmail.com");
     }
 
     // When Register Me button is clicked
@@ -114,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(
                             applicationContext,
                             "Registered with GCM Server successfully.nn"
-                                    + msg, Toast.LENGTH_SHORT).show();
+                                    + msg, Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(
                             applicationContext,

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +28,10 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("UserDetails",
                 Context.MODE_PRIVATE);
         String eMailId = prefs.getString("eMailId", "");
+        String regId = prefs.getString("regId","");
         // Set Title
         usertitleET = (TextView) findViewById(R.id.usertitle);
+        msgET = (TextView) findViewById(R.id.message);
 
         // Check if Google Play Service is installed in Device
         // Play services is needed to handle GCM stuffs
@@ -43,9 +46,10 @@ public class HomeActivity extends AppCompatActivity {
         // When Message sent from Broadcase Receiver is not empty
         if (str != null) {
             // Set the message
-            msgET = (TextView) findViewById(R.id.message);
             msgET.setText(str);
         }
+
+        Log.w("hck regID", regId);
     }
 
     // Check if Google Playservices is installed in Device or not
