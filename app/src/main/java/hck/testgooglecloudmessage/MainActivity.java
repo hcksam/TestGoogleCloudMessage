@@ -31,9 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     AsyncTask<Void, Void, String> createRegIdTask;
-
-    public static final String REG_ID = "regId";
-    public static final String EMAIL_ID = "eMailId";
     EditText emailET;
 
     @Override
@@ -53,16 +50,19 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("UserDetails",
                 Context.MODE_PRIVATE);
 //        prefs.edit().clear().commit();
-        String registrationId = prefs.getString(REG_ID, "");
+        Utility.clearData(getFilesDir(), FixData.messagesFileName);
+        String registrationId = prefs.getString(FixData.REG_ID, "");
 
         //When Email ID is set in Sharedpref, User will be taken to HomeActivity
         if (!TextUtils.isEmpty(registrationId)) {
-            regId = registrationId;
-            storeRegIdinServer();
-            Intent i = new Intent(applicationContext, HomeActivity.class);
-            i.putExtra("regId", registrationId);
-            startActivity(i);
-            finish();
+//            regId = registrationId;
+//            storeRegIdinServer();
+//            Intent i = new Intent(applicationContext, HomeActivity.class);
+//            i.putExtra("regId", registrationId);
+//            startActivity(i);
+//            finish();
+            Intent intent = new Intent(applicationContext, MessagesActivity.class);
+            startActivity(intent);
         }
 
         emailET.setText("hcksamtest@gmail.com");
@@ -136,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("UserDetails",
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(REG_ID, regId);
-        editor.putString(EMAIL_ID, emailID);
+        editor.putString(FixData.REG_ID, regId);
+        editor.putString(FixData.EMAIL_ID, emailID);
         editor.commit();
         storeRegIdinServer();
 
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     // Share RegID with GCM Server Application (Php)
     private void storeRegIdinServer() {
         prgDialog.show();
-        params.put("regId", regId);
+        params.put(FixData.REG_ID, regId);
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
         client.post(ApplicationConstants.APP_SERVER_URL, params,
