@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("UserDetails",
                 Context.MODE_PRIVATE);
 //        prefs.edit().clear().commit();
-        Utility.clearData(getFilesDir(), FixData.messagesFileName);
+//        Utility.clearData(getFilesDir(), FixData.messagesFileName);
         String registrationId = prefs.getString(FixData.REG_ID, "");
 
         //When Email ID is set in Sharedpref, User will be taken to HomeActivity
@@ -163,11 +163,13 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(applicationContext,
                                 "Reg Id shared successfully with Web App ",
                                 Toast.LENGTH_LONG).show();
-                        Intent i = new Intent(applicationContext,
-                                HomeActivity.class);
-                        i.putExtra("regId", regId);
-                        startActivity(i);
-                        finish();
+//                        Intent i = new Intent(applicationContext,
+//                                HomeActivity.class);
+//                        i.putExtra("regId", regId);
+//                        startActivity(i);
+//                        finish();
+                        Intent intent = new Intent(applicationContext, MessagesActivity.class);
+                        startActivity(intent);
                     }
 
                     // When the response returned by REST has Http

@@ -8,16 +8,26 @@
 
     <LinearLayout
         android:orientation="vertical"
+        android:id="@+id/messagesArea"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/refreshButton"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_weight="1">
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/messagesList"/>
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/refreshButton"
+        android:text="@string/label_refresh"
+        android:onClick="refresh"/>
 
 </RelativeLayout>

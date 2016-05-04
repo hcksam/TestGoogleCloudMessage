@@ -1,6 +1,7 @@
 package hck.testgooglecloudmessage;
 
 import android.content.Context;
+import android.text.util.Linkify;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -60,6 +61,7 @@ public class AdvancedArrayAdapter extends ArrayAdapter{
         View view = super.getView(position, convertView, parent);
         TextView text1 = (TextView) view.findViewById(android.R.id.text1);
         text1.setTextSize(32);
+        text1.setAutoLinkMask(Linkify.WEB_URLS);
         text1.setText(filteredData.get(position).getOption());
         text1.setEnabled(true);
 

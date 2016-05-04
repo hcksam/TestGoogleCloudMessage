@@ -12,4 +12,10 @@
     <string name="user_title">Hello User</string>
     <string name="title_activity_home">home</string>
     <string name="title_activity_messages">MessagesActivity</string>
+
+    <string name="label_refresh">Refresh</string>
+
+    <string-array name="messages_optionMenu">
+        <item>清空</item>
+    </string-array>
 </resources>

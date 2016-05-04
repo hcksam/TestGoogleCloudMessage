@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.LinkedList;
@@ -29,17 +30,22 @@ public class MessagesActivity extends AppCompatActivity {
         if (messagesData != null && messagesData.size() >0) {
             AdvancedArrayAdapter adapter = new AdvancedArrayAdapter(context, messagesData);
             messagesList.setAdapter(adapter);
+        }else{
+            messagesList.setAdapter(null);
         }
-//        LinkedList<String> test = Utility.readFile(getFilesDir(), FixData.messagesFileName);
-//        for (String line:test){
-//            Log.w("hck line", line);
-//        }
+    }
+
+    public void refresh(View view){
+        setMessagesList();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_messages, menu);
+        String[] menuItems = getResources().getStringArray(R.array.messages_optionMenu);
+        for (int i = 0; i<menuItems.length; i++) {
+            menu.add(Menu.NONE, i, i, menuItems[i]);
+        }
         return true;
     }
 
@@ -51,8 +57,11 @@ public class MessagesActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case 0:
+                Utility.clearData(getFilesDir(), FixData.messagesFileName);
+                setMessagesList();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
