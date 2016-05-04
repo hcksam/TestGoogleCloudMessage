@@ -46,7 +46,7 @@ public class GCMListNotificationIntentService extends IntentService {
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE
                     .equals(messageType)) {
                 title = "Message Received from Google GCM Server:\n\n";
-                receiveMessage = extras.get(ApplicationConstants.MSG_KEY).toString();
+                receiveMessage = extras.get(FixData.MSG_KEY).toString();
             }
             if (receiveMessage != null) {
                 sendNotification(title, receiveMessage);

@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                                 .getInstance(applicationContext);
                     }
                     regId = gcmObj
-                            .register(ApplicationConstants.GOOGLE_PROJ_ID);
+                            .register(FixData.GOOGLE_PROJ_ID);
                     msg = "Registration ID :" + regId;
 
                 } catch (IOException ex) {
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         params.put(FixData.REG_ID, regId);
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
-        client.post(ApplicationConstants.APP_SERVER_URL, params,
+        client.post(FixData.APP_SERVER_URL, params,
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http
                     // response code '200'
